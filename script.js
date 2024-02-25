@@ -1,21 +1,20 @@
-//your code here
+// Array of band names
+let touristSpots = ['The Virupaksha Temple', 'Victoria Memorial', 'Tajmahal'];
 
-//your code here
-
-function reset() {
-    for (i = 1; i <= 9; i++) {
-        const block = document.getElementById(`${i}`);
-        block.style.backgroundColor = "transparent";
-    }
+// Function to remove articles ('a', 'an', 'the') from the start of a string
+function strip(name) {
+    return name.replace(/^(a |the |an )/i, '').trim();
 }
-  
-document.getElementById('reset_button').addEventListener('click', reset);
 
-document.getElementById('change_button').addEventListener('click', () => {
-    reset();
-    const blockId = document.getElementById("block_id").value;
-    const color = document.getElementById("colour_id").value;
-    // alert(colorId)
-    const block = document.getElementById(`${blockId}`);
-    block.style.backgroundColor = color;
+// Sorting the array based on the band name without articles
+touristSpots.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
+
+// Getting the 'ul' element by its ID
+const bandsList = document.getElementById('bands');
+
+// Creating 'li' elements for each sorted band name and appending them to the 'ul'
+touristSpots.forEach(spot => {
+    const li = document.createElement('li');
+    li.textContent = spot;
+    bandsList.appendChild(li);
 });
